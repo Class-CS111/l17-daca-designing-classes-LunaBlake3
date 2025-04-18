@@ -73,11 +73,101 @@ public class DACArecipient
   private char sex;
 
 	/***** ACCESSORS *****/
-	//TODO: Copy the accessors you wrote in the previous lab and insert them here.
+
+	public String getSurname(){
+		return this.surname;
+	}
+	public String getGivenName(){
+		return this.givenName;
+	}
+	public String getUscisNumber(){
+		return this.uscisNumber;
+	}
+	public String getCountryOfOrigin(){
+		return this.countryOfOrigin;
+	}
+	public int getBirthday(){
+		return this.birthday;
+	}
+	public int getValidFromDate(){
+		return this.validFromDate;
+	}
+	public int getExpirationDate(){
+		return this.expirationDate;
+	}
+	public char getSex(){
+		return this.sex;
+	}
 
 	/***** MUTATORS *****/
-	//TODO: Copy the mutators you wrote in the previous lab and insert them here.
-    
+	
+	/*
+	 * sets surname to parameter value of calling object
+	 * 
+	 * @param surname String representhing last name, assume it exists and is valid
+	 */
+
+	 public void setSurname(String surname){
+		this.surname = surname;
+	}
+	/*
+	 * sets given name to parameter value of calling object
+	 * 
+	 * @param givenName String representhing first name, assume it exists and is valid
+	 */
+	public void setGivenName(String givenName){
+		this.givenName = givenName;
+	}
+	/*
+	 * sets uscis # to parameter value of calling object
+	 * 
+	 * @param uscisNumber String representhing uscis #, assume it exists and is valid
+	 */
+	public void setUscisNumber(String uscisNumber){
+		this.uscisNumber = uscisNumber;
+	}
+	/*
+	 * sets country of origin to parameter value of calling object
+	 * 
+	 * @param countryOfOrigin String representhing country of origin, assume it exists and is valid
+	 */
+	public void setCountryOfOrigin(String countryOfOrigin){
+		this.countryOfOrigin = countryOfOrigin;
+	}
+	/*
+	 * sets birthday to parameter value of calling object
+	 * 
+	 * @param birthday int representhing birthday, assume it exists and is valid
+	 */
+	public void setBirthday(int birthday){
+		this.birthday = birthday;
+	}
+	/*
+	 * sets valid date to parameter value of calling object
+	 * 
+	 * @param validFromDate int representhing valid date, assume it exists and is valid
+	 */
+	public void setValidFromDate(int validFromDate){
+		this.validFromDate = validFromDate;
+	}
+	/*
+	 * sets expiration date to parameter value of calling object
+	 * 
+	 * @param expirationDate int representhing expiration date, assume it exists and is valid
+	 */
+	public void setExpirationDate(int expirationDate){
+		this.expirationDate = expirationDate;
+	}
+	/*
+	 * sets sex to parameter value of calling object
+	 * 
+	 * @param sex char representhing sex, assume it exists and is valid
+	 */
+	public void setSex(char sex){
+		this.sex = sex;
+	}
+
+
   /**DESCRIPTION: Assigns parameters to corresponding instance variables of calling DACArecipient. */
 	public void setAll(String surname, String givenName, String uscisNumber, String countryOfOrigin, int birthday, int validFromDate, int expirationDate, char sex)
 	{
@@ -92,13 +182,33 @@ public class DACArecipient
 	}
 
 	/***** OTHER REQUIRED METHODS *****/
-	//TODO: Write the toString method, remember to include documentation 
+	/** Description: Creates a string of all the calling
+	 * DACArecipient's instance variables seperated by a comma and a single space.
+	 */
+	public String toString()
+	{
+		return String.format("%s, %s, %s, %s, %d, %d, %d, %c", 
+		surname, givenName, uscisNumber, countryOfOrigin, birthday, validFromDate, expirationDate, sex);
+	}
 
 
-	//TODO: Write the equals method, remember to include documentation
- 
+	/**Description: compares the instance variables of the calling 
+	 * DACArecipient with those of the parameter.
+	 * If all are equal then returns true, otherwise false.
+	 */
+	public boolean equals(DACArecipient other)
+	{
+		return this.surname.equals(other.surname) &&
+			this.givenName.equals(other.givenName) &&
+			this.uscisNumber.equals(other.uscisNumber) &&
+			this.countryOfOrigin.equals(other.countryOfOrigin) &&
+			this.birthday == other.birthday &&
+			this.validFromDate == other.validFromDate &&
+			this.expirationDate == other.expirationDate &&
+			this.sex == other.sex;
+
+	}
   
-	//TODO: Revise the following method to use the jdnToDate method to format the three dates.
   /** DESCRIPTION: Prints to the console the Employment Authorization Card using the calling DACArecipient's instance variables.*/
   public String printCard()
   {
@@ -118,9 +228,9 @@ public class DACArecipient
 		card += String.format("║%-25s%-45S║%n", ASCII_ART_5, LABEL_BIRTH_COUNTRY);
 		card += String.format("║%-25s%-45s║%n", ASCII_ART_6, countryOfOrigin);
 		card += String.format("║%-25s%-15S%-30S║%n", ASCII_ART_7, LABEL_BIRTH_DATE, LABEL_SEX);
-		card += String.format("║%-25s%-15d%-30s║%n", ASCII_ART_8, birthday, sex);
-		card += String.format("║%-25s%-15S%-30d║%n", ASCII_ART_9, LABEL_VALID_DATE, validFromDate);
-		card += String.format("║%-25s%-15S%-30d║%n", "", LABEL_EXPIRE_DATE, expirationDate);
+		card += String.format("║%-25s%-15s%-30s║%n", ASCII_ART_8, jdnToDate(birthday), sex);
+		card += String.format("║%-25s%-15S%-30s║%n", ASCII_ART_9, LABEL_VALID_DATE, jdnToDate(validFromDate));
+		card += String.format("║%-25s%-15S%-30s║%n", "", LABEL_EXPIRE_DATE, jdnToDate(expirationDate));
 		card += String.format("║%-25s%-45s║%n", ASCII_CREDIT, LABEL_REENTRY_DISCLAIMER);
 		card += String.format("╚══════════════════════════════════════════════════════════════════════╝%n");
 		return card;
